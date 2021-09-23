@@ -1,9 +1,4 @@
-var btn = document.getElementById('send-f1');
-
-
-btn.addEventListener('click', verifyIPAdress);
-
-function verifyIPAdress() {
+var funtionizi = function verifyIPAdress() {
     //get the IP adress
     let ip = document.getElementById('ip_adress-f1').value;
 
@@ -11,7 +6,9 @@ function verifyIPAdress() {
     let regex = "^([0-9]{1,3}\\.){3}[0-9]{1,3}$";
     let regexObj = new RegExp(regex);
 
+    //if the regex is ok
     if(regexObj.test(ip)){
+
         /* remove the "."'s and divide the IP adress into 4 parts */
         //define an array
         let ipPart = new Array(4);
@@ -86,8 +83,6 @@ function verifyIPAdress() {
             console.log(classIP + " " + nbHote + " " + nbReseau);
         }
     }
-
-
 }
 
 
