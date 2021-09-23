@@ -1,12 +1,9 @@
 Fonctionnalités annexes :
-	1) savoir si une IP est valide
 	2) savoir si un masque est valide
 	3) menu
 	4) visuel
 
 5 fonctionnalités principales:
-
-	1) IP -> déterminer la classe, le nombre de réseaux et le nombre d'hotes
 	2) IP + masque -> adresse réseau et adresse de broadcast du réseau.
 	3) IP + masque + adresse réseau -> est ce que l'ip appartient au SR
 	4) IP machine + masque machine + adresse réseau -> IP est une machine du réseau?
