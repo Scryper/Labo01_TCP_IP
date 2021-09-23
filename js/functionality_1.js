@@ -10,6 +10,7 @@ function ipClass(){
     //get the IP adress
     let ip = document.getElementById('ip_adress-f1').value;
 
+    //passed to the function by adress not by value
     let ipPart = new Array(4);
 
     if(verifyIPAdress(ip,ipPart)){
