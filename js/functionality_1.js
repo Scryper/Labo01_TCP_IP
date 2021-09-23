@@ -55,7 +55,7 @@ function ipClass(){
             }
         }
 
-        answerF1.innerText="Class : " + classIP +"\nNumber of subnetwork : "+nbReseau +"\nNumber of host : "+nbHote;
+        answerF1.innerText="IP adress : "+ip+"\nClass : " + classIP +"\nNumber of subnetwork : "+nbReseau +"\nNumber maximum of host per subnetwork : "+nbHote;
     }
     else{
         answerF1.innerText="The IP adress entered is incorrect."
