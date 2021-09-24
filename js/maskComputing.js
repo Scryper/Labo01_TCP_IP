@@ -1,6 +1,5 @@
 function verifyMask(mask){
     let regex = "^\/{0,1}[0-9]{1,2}$";
-
     let regexObj = new RegExp(regex);
 
     //if the regex is ok

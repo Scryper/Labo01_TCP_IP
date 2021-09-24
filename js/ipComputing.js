@@ -1,5 +1,4 @@
 function verifyIPAdress(ip,ipPart) {
-
     //check with a regex if the input is correct
     let regex = "^([0-9]{1,3}\\.){3}[0-9]{1,3}$";
     let regexObj = new RegExp(regex);
@@ -35,7 +34,6 @@ function verifyIPAdress(ip,ipPart) {
 //both IP must have the same mask (composed of octet and digit corresponding to the position of the first not null digit)
 //return true if they are in the same network
 function isSameNetwork(ip1,ip2,mask){
-
     //compare each bit from the mask
     //if they are the same, the two IP are from the same network
     let different = false;
@@ -56,13 +54,5 @@ function isSameNetwork(ip1,ip2,mask){
             }
         }
     }
-
     return different;
 }
-
-
-
-
-
-
-
