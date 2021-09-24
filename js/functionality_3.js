@@ -1,6 +1,6 @@
 //get the button and the answer field
 var btn = document.getElementById('send-f3');
-var answerF3 = document.getElementById('answerF3');
+var answerF3 = document.getElementById('answer-f3');
 
 //when you click on the button
 btn.addEventListener('click', subnetContained);

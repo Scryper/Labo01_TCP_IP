@@ -1,6 +1,6 @@
 //get the button and the answer field
 var btn = document.getElementById('send-f1');
-var answerF1 = document.getElementById('answerF1');
+var answerF1 = document.getElementById('answer-f1');
 
 //when you click on the button
 btn.addEventListener('click', ipClass);
@@ -13,7 +13,7 @@ function ipClass() {
     //passed to the function by adress not by value
     let ipPart = new Array(4);
 
-    if(verifyIPAdress(ip,ipPart)) {
+    if(verifyIPAdress(ip, ipPart)) {
         let classIP = "";
         let nbReseau = 0;
         let nbHote = 0;
