@@ -31,6 +31,35 @@ function verifyIPAdress(ip,ipPart) {
     return false;
 }
 
+//compare two BINARY IP
+//both IP must have the same mask (composed of octet and digit corresponding to the position of the first not null digit)
+//return true if they are in the same network
+function isSameNetwork(ip1,ip2,mask){
+
+    //compare each bit from the mask
+    //if they are the same, the two IP are from the same network
+    let different = false;
+
+    for(let i=0;i<mask.octet;i++){
+        if(i+1==mask.octet){
+            for(let j = 0;j<mask.digit;j++){
+                if(ip1[i].substring(j,j+1)!=ip2[i].substring(j,j+1)){
+                    different = true;
+                }
+            }
+        }
+        else{
+            for(let j = 0;j<8;j++){
+                if(ip1[i].substring(j,j+1)!=ip2[i].substring(j,j+1)){
+                    different = true;
+                }
+            }
+        }
+    }
+
+    return different;
+}
+
 
 
 

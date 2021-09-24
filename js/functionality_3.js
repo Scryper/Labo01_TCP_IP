@@ -1,21 +1,25 @@
 //get the button and the answer field
 var btn = document.getElementById('send-f3');
+var answerF3 = document.getElementById('answerF3');
 
 //when you click on the button
 btn.addEventListener('click', subnetContained);
 
 function subnetContained(){
-    //get the IP adress
+    //get the IP adress, the mask and the net
     let ip = document.getElementById('ip_adress-f3').value;
     let mask = document.getElementById('mask-f3').value;
     let net = document.getElementById('net_adress-f3').value;
 
+    //creating the array containing the number of the IP's
     let ipPart = new Array(4);
     let netPart = new Array(4);
 
+    //if the mask and the IP's are correct
     if(verifyMask(mask)&&verifyIPAdress(ip,ipPart)&&verifyIPAdress(net,netPart)){
+
         //verify if there is a "/" in the mask
-        if(mask.substring(0,1)=="\/"){
+        if(mask.substring(0,1)==="\/"){
             mask=mask.substring(1,mask.length);
         }
 
@@ -25,86 +29,44 @@ function subnetContained(){
             netPart[i]=addZeros(intoBinaries(netPart[i]));
         }
 
-        //determine the mask of the net
-        let octet=0;
-        let chiffre=0;
-        let done = false;
-
-        //on parcourt les octets a l'envers
-        for(let i=3;i>=0;i--){
-            //on parcourt chaque octet a l'envers pour savoir quel est le premier bit a 1
-            for(let j=7;j>=0;j--){
-                if(netPart[i].substring(j,j+1)!=0){
-                    octet = i+1;
-                    chiffre = j+1;
-                    done = true;
-                    break;
-                }
-            }
-            if(done==true){
-                break;
-            }
+        //creating an object to get the informations on the mask
+        let maskObject ={
+            octet:0,
+            digit:0
         }
 
-        netMask = 8*(octet-1) + chiffre;
+        //compute the mask of the net
+        let netMask=computeMask(netPart,maskObject);
 
-        //si les deux masques sont les mêmes
+        //if both mask are equals
         if(netMask==mask){
-            console.log("meme masque");
 
-            //on parcourt chaque bit du masque pour le comparer avec celui de l'IP
-            //s'ils sont semblable, les IP sont dans le même sous réseau
+            let different = isSameNetwork(netPart,ipPart,maskObject);
 
-            let different = false;
-            for(let i=0;i<octet;i++){
-                if(i+1==octet){
-                    for(let j = 0;j<chiffre;j++){
-                        if(netPart[i].substring(j,j+1)!=ipPart[i].substring(j,j+1)){
-                            different = true;
-                        }
-                    }
-                }
-                else{
-                    for(let j = 0;j<8;j++){
-                        if(netPart[i].substring(j,j+1)!=ipPart[i].substring(j,j+1)){
-                            different = true;
-                        }
-                    }
-                }
-            }
             if(different){
-                console.log("different reseau");
+                answerF3.innerText="The IP's are not on the same network";
             }
             else{
-                console.log("meme reseau");
+                answerF3.innerText="The IP's are on the same network";
             }
 
         }
         else{
-            console.log("masque different");
+            answerF3.innerText="The mask of the two IP are different\nThe IP's are not on the same network";
         }
-        /*
-        console.log(netPart);
-        console.log(octet);
-        console.log(chiffre);
-        console.log(netMask);*/
-
-
-
-
     }
     else{
-        //faire cas par cas pour les erreurs
+        answerF3.innerText="";
+        if(!verifyIPAdress(ip,ipPart)){
+            answerF3.innerText="The IP adress is not a valid IP adress.";
+        }
+        if(!verifyMask(mask)){
+            answerF3.innerText=answerF3.innerText+"\nThe mask is not a correct mask.";
+        }
+        if(!verifyIPAdress(net,netPart)){
+            answerF3.innerText=answerF3.innerText+"\nThe Net adress is not a valid IP adress..";
+        }
     }
-
 }
 
-function addZeros(number) {
-    while (number.length < 8) number = "0" + number;
-    return number;
-}
-
-function intoBinaries(number){
-    return parseInt(number,10).toString(2);
-}
 
