@@ -21,8 +21,8 @@ function subnetContained() {
         && verifyIPAddress(ip, ipParts) && verifyIPAddress(net, netParts)) {
         //transform the IPs into binaries number
         for(let i = 0 ; i < 4 ; i++){
-            ipParts[i] = addZeros(intoBinaries(ipParts[i]));
-            netParts[i] = addZeros(intoBinaries(netParts[i]));
+            ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
+            netParts[i] = addZerosLeft(convert(netParts[i], 10, 2));
         }
         //creating an object to get the information on the mask
         let maskObject = {

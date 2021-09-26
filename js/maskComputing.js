@@ -25,7 +25,7 @@ function convertMaskToCIDR(maskParts) {
     return count;
 }
 
-function convertMaskToDecimal(mask) {
+function convertMaskToBinary(mask) {
     let maskParts = ["", "", "", ""];
     let count = 1;
     let part = 0;
@@ -38,8 +38,9 @@ function convertMaskToDecimal(mask) {
     }
     // add zeros to each byte
     for(let i = part ; i < maskParts.length ; i++) {
-        maskParts[part] = addZeros(maskParts[part]);
+        maskParts[i] = addZerosRight(maskParts[i]);
     }
+    return maskParts;
 }
 
 function computeMask(ip, maskObject){

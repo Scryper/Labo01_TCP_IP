@@ -1,8 +1,11 @@
-function addZeros(number) {
-    while (number.length < 8) number = "0" + number;
-    return number;
+function addZerosLeft(number) {
+    return number.padStart(8, "0");
 }
 
-function intoBinaries(number){
-    return parseInt(number,10).toString(2);
+function addZerosRight(number) {
+    return number.padEnd(8, "0");
+}
+
+function convert(number, radixFrom, radixTo){
+    return parseInt(number, radixFrom).toString(radixTo);
 }
