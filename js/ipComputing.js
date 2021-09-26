@@ -1,4 +1,4 @@
-function verifyIPAdress(ip, ipPart) {
+function verifyIPAddress(ip, ipPart) {
     //check with a regex if the input is correct
     let regex = "^([0-9]{1,3}\\.){3}[0-9]{1,3}$";
     let regexObj = new RegExp(regex);

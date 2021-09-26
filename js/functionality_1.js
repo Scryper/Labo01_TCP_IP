@@ -5,34 +5,34 @@ var answerF1 = document.getElementById('answer-f1');
 //when you click on the button
 btn.addEventListener('click', ipClass);
 
-//return the class of an IP adress
+//return the class of an IP address
 function ipClass() {
-    //get the IP adress
-    let ip = document.getElementById('ip_adress-f1').value;
+    //get the IP address
+    let ip = document.getElementById('ip_address-f1').value;
 
-    //passed to the function by adress not by value
+    //passed to the function by address not by value
     let ipPart = new Array(4);
 
-    if(verifyIPAdress(ip, ipPart)) {
+    if(verifyIPAddress(ip, ipPart)) {
         let classIP = "";
-        let nbReseau = 0;
-        let nbHote = 0;
+        let netNb = 0;
+        let hostsNb = 0;
 
         //Class A
         if(ipPart[0] > 0 && ipPart[0] < 127){
             classIP = "A";
-            nbReseau = 126;
-            nbHote = 16777214;
+            netNb = 126;
+            hostsNb = 16777214;
         }
         else if(ipPart[0] >= 128 && ipPart[0] < 192) {
             classIP = "B";
-            nbReseau = 16384;
-            nbHote = 65534;
+            netNb = 16384;
+            hostsNb = 65534;
         }
         else if(ipPart[0] >= 192 && ipPart[0] < 224) {
             classIP = "C";
-            nbReseau = 2097152;
-            nbHote = 254;
+            netNb = 2097152;
+            hostsNb = 254;
         }
         else if(ipPart[0] >= 224 && ipPart[0] < 240) {
             classIP = "D";
@@ -43,10 +43,10 @@ function ipClass() {
         else {
             classIP = "no class"
         }
-        answerF1.innerText = "IP adress : " + ip + "\nClass : " + classIP + "\nNumber of subnetwork : " + nbReseau +
-            "\nNumber maximum of host per subnetwork : " + nbHote;
+        answerF1.innerText = "IP address : " + ip + "\nClass : " + classIP + "\nNumber of subnetwork : " + netNb +
+            "\nNumber maximum of hosts per subnetwork : " + hostsNb;
     }
     else {
-        answerF1.innerText = "The IP adress entered is incorrect."
+        answerF1.innerText = "The IP address entered is incorrect."
     }
 }

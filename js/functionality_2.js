@@ -1,23 +1,28 @@
-//get the button and the answer field
+// get the button and the answer field
 var btn = document.getElementById('send-f2');
 var answerF2 = document.getElementById('answer-f2');
 
-//when you click on the button
+// event binding
 btn.addEventListener('click', netInfo);
 
-//return the class of an IP adress
+// net address, broadcast address
 function netInfo() {
-    //
-    let ip = document.getElementById('ip_adress-f2').value;
-    let ipPart = new Array(4);
+    // get the ip and the mask the user wrote
+    let ip = document.getElementById('ip_address-f2').value;
+    let ipParts = new Array(4);
 
     let mask = document.getElementById('mask-f2').value;
+    let maskParts = new Array(4);
 
-    if(verifyIPAdress(ip, ipPart) && verifyMask(mask)) {
+    if(verifyIPAddress(ip, ipParts) && (verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))) {
+        // ip in binary
+        for (let i = 0 ; i < ipParts.length ; i++) {
+            ipParts[i] = addZeros(intoBinaries(ipParts[i]));
+        }
 
     } else {
         answerF2.innerText = "";
-        if(!verifyIPAdress(ip, ipPart)) answerF2.innerText += "IP adress is not valid.";
-        if(!verifyMask(mask)) answerF2.innerText += "\nMask is not valid.";
+        if(!verifyIPAddress(ip, ipParts)) answerF2.innerText += "IP address is not valid.";
+        if(!verifyMaskCIDR(mask)) answerF2.innerText += "\nMask is not valid.";
     }
 }
