@@ -3,22 +3,25 @@
     <head>
         <meta charset="UTF-8">
         <title>Functionality 3</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/functionality_files.css"/>
     </head>
     <body>
-        <h1>Does the IP adress belong to this network ?</h1>
+        <h1>Does the IP address belong to this network ?</h1>
 
         <form>
             <p>IP address :</p>
-            <input type="text" id="ip_address-f3" size="20"/>
+            <input type="text" id="ip_address-f3" size="20" class="text_input" placeholder="IP address"/>
 
             <p>Mask :</p>
-            <input type="text" id="mask-f3" size="20"/>
+            <input type="text" id="mask-f3" size="20" class="text_input" placeholder="Mask"/>
 
             <p>Net address :</p>
-            <input type="text" id="net_address-f3" size="20"/>
+            <input type="text" id="net_address-f3" size="20" class="text_input" placeholder="Net address"/>
 
-            <p></p>
-            <input type="button" id="send-f3" value="Send"/>
+            <br/>
+            <br/>
+            <input type="button" id="send-f3" value="Send" class="button_input"/>
         </form>
 
         <p id="answer-f3"></p>

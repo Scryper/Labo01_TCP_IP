@@ -1,0 +1,17 @@
+input {
+    border-radius: 30px;
+}
+
+.text_input {
+    height: 20px;
+    text-align: center;
+}
+
+.button_input {
+    height: 25px;
+}
+
+.button_input:hover {
+    background-color: #2a9d8f;
+    color: white;
+}
