@@ -14,7 +14,7 @@ function ipClass() {
     let ipPart = new Array(4);
 
     if(verifyIPAddress(ip, ipPart)) {
-        let classIP = "";
+        let classIP;
         let netNb = 0;
         let hostsNb = 0;
 

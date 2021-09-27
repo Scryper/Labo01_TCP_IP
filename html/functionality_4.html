@@ -7,14 +7,19 @@
         <link rel="stylesheet" type="text/css" href="../css/functionality_files.css"/>
     </head>
     <body>
+        <h1>Is the IP address part of the network's machine address ?</h1>
         <form>
-            <p>IP address :</p>
+            <label for="ip_address-f4">IP address :</label><br/>
             <input type="text" id="ip_address-f4" size="20" class="text_input" placeholder="IP address"/>
 
-            <p>Mask :</p>
+            <br/>
+            <br/>
+            <label for="mask-f4">Mask :</label><br/>
             <input type="text" id="mask-f4" size="20" class="text_input" placeholder="Mask"/>
 
-            <p>Net address :</p>
+            <br/>
+            <br/>
+            <label for="net_address-f4">Net address :</label><br/>
             <input type="text" id="net_address-f4" size="20" class="text_input" placeholder="Net address"/>
 
             <br/>
@@ -22,8 +27,14 @@
             <input type="button" id="send-f4" value="Send" class="button_input"/>
         </form>
         <br/>
-        <p id="answer-f2"></p>
-        <br/>
+        <p id="answer-f4"></p>
+
         <a href="site.html">Back</a>
+
+        <script type="text/javascript" src="../js/binaryFunctions.js"></script>
+        <script type="text/javascript" src="../js/ipComputing.js"></script>
+        <script type="text/javascript" src="../js/maskComputing.js"></script>
+        <script type="text/javascript" src="../js/isInNetwork.js"></script>
+        <script type="text/javascript" src="../js/functionality_4.js"></script>
     </body>
 </html>

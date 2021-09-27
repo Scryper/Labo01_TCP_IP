@@ -19,25 +19,8 @@ function subnetContained() {
     //if the mask and the IP's are correct
     if((verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))
         && verifyIPAddress(ip, ipParts) && verifyIPAddress(net, netParts)) {
-        //transform the IPs into binaries number
-        for(let i = 0 ; i < 4 ; i++){
-            ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
-            netParts[i] = addZerosLeft(convert(netParts[i], 10, 2));
-        }
-        //creating an object to get the information on the mask
-        let maskObject = {
-            byte:0,
-            digit:0
-        }
-        //compute the mask of the net
-        let netMask = computeMask(netParts, maskObject);
-        //if both mask are equals
-        if(netMask == mask) {
-            let different = isSameNetwork(netParts, ipParts, maskObject);
-            if(different) answerF3.innerText = "The IP's are not on the same network";
-            else answerF3.innerText = "The IP's are on the same network";
-        }
-        else answerF3.innerText = "The mask of the two IP are different\nThe IP's are not on the same network";
+        if(isInNetwork(ipParts, netParts, mask)) answerF3.innerText = "The IP's are on the same network";
+        else answerF3.innerText = "The IP's are not on the same network";
     }
     else {
         answerF3.innerText = "";

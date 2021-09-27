@@ -28,19 +28,19 @@ function verifyIPAddress(ip, ipPart) {
 function isSameNetwork(ip1, ip2, mask) {
     //compare each bit from the mask
     //if they are the same, the two IP are from the same network
-    let different = false;
+    let same = true;
 
     for(let i = 0 ; i < mask.byte ; i++) {
         if(i + 1 == mask.byte) {
             for(let j = 0 ; j < mask.digit ; j++) {
-                if(ip1[i].substring(j, j + 1) != ip2[i].substring(j, j + 1)) different = true;
+                if(ip1[i].substring(j, j + 1) != ip2[i].substring(j, j + 1)) same = false;
             }
         }
         else {
             for(let j = 0 ; j < 8 ; j++){
-                if(ip1[i].substring(j, j + 1 ) != ip2[i].substring(j, j + 1)) different = true;
+                if(ip1[i].substring(j, j + 1 ) != ip2[i].substring(j, j + 1)) same = false;
             }
         }
     }
-    return different;
+    return same;
 }
