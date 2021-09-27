@@ -16,10 +16,18 @@ function netInfo() {
     if(verifyIPAddress(ip, ipParts) && (verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))) {
         let netParts = ["", "", "", ""];
         let broadcastParts = ["", "", "", ""];
-        // convert the mask in decimal if necessary
         if(verifyMaskCIDR(mask)) maskParts = convertMaskToBinary(mask);
+        else {
+            for (let i = 0 ; i < 3 ; i++) {
+                maskParts[i] = mask.substring(0, mask.indexOf("."));
+                mask = mask.substring(mask.indexOf(".") + 1, mask.length);
+            }
+            for (let i = 0 ; i < maskParts.length ; i++) {
+                maskParts[i] = addZerosLeft(convert(maskParts[i], 10, 2))
+            }
+        }
         // ip in binary
-        // then separating the net part from the ip
+        // then separating the net part and the broadcast part
         for (let i = 0 ; i < ipParts.length ; i++) {
             ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
             for (let j = 0; j < 8; j++) {
@@ -28,12 +36,23 @@ function netInfo() {
                     broadcastParts[i] += "0";
                 }
                 else {
-                    broadcastParts[i] += ipParts[i][j];
+                    broadcastParts[i] += "1";
                     netParts[i] += "0";
                 }
             }
         }
-
+        for (let i = 0 ; i < 4 ; i++) {
+            netParts[i] = convert(netParts[i], 2, 10);
+            broadcastParts[i] = convert(broadcastParts[i], 2, 10);
+        }
+        answerF2.innerText = "Net address : ";
+        let answerBroadcast = "\nBroadcast address : ";
+        for (let i = 0 ; i < netParts.length ; i++) {
+            answerF2.innerText += netParts[i] + ".";
+            if(i < 2) answerBroadcast += netParts[i] + ".";
+            else answerBroadcast += broadcastParts[i] + ".";
+        }
+        answerF2.innerText += answerBroadcast;
     } else {
         answerF2.innerText = "";
         if(!verifyIPAddress(ip, ipParts)) answerF2.innerText += "IP address is not valid.";

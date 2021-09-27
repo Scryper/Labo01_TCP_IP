@@ -4,7 +4,7 @@ function verifyMaskCIDR(mask) {
 
     //if the regex is ok
     if(regexObjCIDR.test(mask)) {
-        if(mask.substring(0, 1).localeCompare("\/")) mask = mask.substring(1, mask.length);
+        if(mask[0].localeCompare("\/") == 0) mask = mask.substring(1, mask.length);
         if(mask > 31 || mask < 1) return false;
         return true;
     }
