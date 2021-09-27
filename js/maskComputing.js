@@ -29,7 +29,8 @@ function convertMaskToBinary(mask) {
     let maskParts = ["", "", "", ""];
     let count = 1;
     let part = 0;
-    // we had the amount of 1s that we need
+    if(mask[0].localeCompare("\/") == 0) mask = mask.substring(1, mask.length);
+    // we add the amount of 1s that we need
     for(let i = 0 ; i < mask ; i++) {
         maskParts[part] += "1";
         // if we complete a byte, we go to the next one

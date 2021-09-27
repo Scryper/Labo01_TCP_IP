@@ -28,12 +28,14 @@ function netInfo() {
         }
         // ip in binary
         // then separating the net part and the broadcast part
+        let count = 0;
         for (let i = 0 ; i < ipParts.length ; i++) {
             ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
-            for (let j = 0; j < 8; j++) {
+            for (let j = 0; j < ipParts[i].length; j++) {
                 if(maskParts[i][j].localeCompare("1") == 0) {
                     netParts[i] += ipParts[i][j];
                     broadcastParts[i] += "0";
+                    count = (count < 8) ? count + 1 : 0 ;
                 }
                 else {
                     broadcastParts[i] += "1";
@@ -41,16 +43,14 @@ function netInfo() {
                 }
             }
         }
-        for (let i = 0 ; i < 4 ; i++) {
-            netParts[i] = convert(netParts[i], 2, 10);
-            broadcastParts[i] = convert(broadcastParts[i], 2, 10);
-        }
         answerF2.innerText = "Net address : ";
         let answerBroadcast = "\nBroadcast address : ";
+        // count
         for (let i = 0 ; i < netParts.length ; i++) {
+            netParts[i] = convert(netParts[i], 2, 10);
+            broadcastParts[i] = convert(broadcastParts[i], 2, 10);
             answerF2.innerText += netParts[i] + ".";
-            if(i < 2) answerBroadcast += netParts[i] + ".";
-            else answerBroadcast += broadcastParts[i] + ".";
+            answerBroadcast += broadcastParts[i] + ".";
         }
         answerF2.innerText += answerBroadcast;
     } else {
