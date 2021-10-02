@@ -29,7 +29,6 @@ function awarenessCheck(){
             digit:0
         }
 
-
         //check if the masks are the same
         if(sameMask(mask1,maskParts1, mask2,maskParts2,maskObject)){
             if(isSameNetwork(ipParts1,ipParts2, maskObject)){
@@ -43,6 +42,4 @@ function awarenessCheck(){
             answerF5.innerText = "The IP's have different masks";
         }
     }
-
-
 }
