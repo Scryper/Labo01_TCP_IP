@@ -65,3 +65,28 @@ function computeMask(ip, maskObject){
     //computing the mask in decimal
     return 8 * (maskObject.byte - 1) + maskObject.digit;
 }
+
+function sameMask(mask1, maskParts1, mask2,maskParts2, maskObject1) {
+
+    //if the mask is not in the CIDR form
+    if(verifyMaskDecimal(mask1, maskParts1)){
+        for(let i = 0 ; i < 4 ; i++){
+            maskParts1[i] = addZerosLeft(convert(maskParts1[i], 10, 2));
+        }
+        mask1 = computeMask(maskParts1,maskObject1);
+    }
+
+    //if the mask is not in the CIDR form
+    if(verifyMaskDecimal(mask2, maskParts2)){
+        for(let i = 0 ; i < 4 ; i++){
+            maskParts2[i] = addZerosLeft(convert(maskParts2[i], 10, 2));
+        }
+        let maskObject2 = {
+            byte:0,
+            digit:0
+        };
+        mask2 = computeMask(maskParts2,maskObject2);
+    }
+    //if both mask are equals
+    return (mask1==mask2);
+}
