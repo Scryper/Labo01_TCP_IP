@@ -32,14 +32,14 @@ function awarenessCheck(){
         //check if the masks are the same
         if(sameMask(mask1,maskParts1, mask2,maskParts2,maskObject)){
             if(isSameNetwork(ipParts1,ipParts2, maskObject)){
-                answerF5.innerText = "The IP's are in the same network";
+                answerF5.innerText = "The IPs are in the same network";
             }
         else{
-                answerF5.innerText = "The IP's are not in the same network";
+                answerF5.innerText = "The IPs are not in the same network";
             }
         }
         else{
-            answerF5.innerText = "The IP's have different masks";
+            answerF5.innerText = "The IPs have different masks";
         }
     }
 }
