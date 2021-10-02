@@ -42,4 +42,11 @@ function awarenessCheck(){
             answerF5.innerText = "The IPs have different masks";
         }
     }
+    else {
+        answerF5.innerText = "";
+        if(!verifyIPAddress(ip1, ipParts1)) answerF5.innerText += "IP address 1 is not valid.";
+        if(!verifyMaskCIDR(mask1)) answerF5.innerText += "\nMask  1 is not valid.";
+        if(!verifyIPAddress(ip2, ipParts2)) answerF5.innerText += "IP address 2 is not valid.";
+        if(!verifyMaskCIDR(mask2)) answerF5.innerText += "\nMask  2 is not valid.";
+    }
 }
