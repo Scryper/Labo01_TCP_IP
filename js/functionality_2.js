@@ -2,6 +2,7 @@
 var btn = document.getElementById('send-f2');
 var answerF2 = document.getElementById('answer-f2');
 
+
 // event binding
 btn.addEventListener('click', netInfo);
 
@@ -12,6 +13,8 @@ function netInfo() {
     let ipParts = new Array(4);
     let mask = document.getElementById('mask-f2').value;
     let maskParts = new Array(4);
+    let isChecked = document.getElementById('cb-f2').checked;
+    console.log(isChecked);
 
     if(verifyIPAddress(ip, ipParts) && (verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))) {
         let netParts = ["", "", "", ""];

@@ -17,7 +17,7 @@ function isIPOk() {
 
     if(verifyIPAddress(ip, ipParts) && (verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))
         && verifyIPAddress(net, netParts)) {
-        if(isInNetwork()) {
+        if(isInNetwork(ipParts, netParts, mask,maskParts)) {
             let unauthorizedAddress = ["", "", "", ""];
             if(verifyMaskCIDR(mask)) maskParts = convertMaskToBinary(mask);
             else {
@@ -34,6 +34,7 @@ function isIPOk() {
             for (let i = 0 ; i < ipParts.length ; i++) {
                 ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
                 for (let j = 0; j < ipParts[i].length; j++) {
+
                     if(maskParts[i][j].localeCompare("1") == 0) {
                         unauthorizedAddress[i] += ipParts[i][j];
                     }
