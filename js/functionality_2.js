@@ -27,14 +27,16 @@ function netInfo() {
             if(!verifyMaskCIDR(mask)) {
                 mask = convertMaskToCIDR(convert(mask, 10, 2));
             }
+
+            // if class A/B/C, only 1/2/3 bytes need to be fill with 1s (see line 97)
+            if(ipParts[0] > 0 && ipParts[0] < 127) byte = 1;
+            else if(ipParts[0] >= 128 && ipParts[0] < 192) byte = 2;
+            else if(ipParts[0] >= 192 && ipParts[0] < 224) byte = 3;
+            else possible = false;
+            if(byte * 8 >= mask) possible = false;
+
             // check if the mask is a multiple of 8
             if(mask % 8 != 0) {
-                // if class A/B/C, only 1/2/3 bytes need to be fill with 1s (see line 97)
-                if(ipParts[0] > 0 && ipParts[0] < 127) byte = 1;
-                else if(ipParts[0] >= 128 && ipParts[0] < 192) byte = 2;
-                else if(ipParts[0] >= 192 && ipParts[0] < 224) byte = 3;
-                else possible = false;
-                if(byte * 8 >= mask) possible = false;
                 subnetting = true;
             }
         }
