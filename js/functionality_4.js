@@ -18,6 +18,7 @@ function isIPOk() {
     if(verifyIPAddress(ip, ipParts) && (verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))
         && verifyIPAddress(net, netParts)) {
         if(isInNetwork(ipParts, netParts, mask,maskParts)) {
+            // broadcast address
             let unauthorizedAddress = ["", "", "", ""];
             if(verifyMaskCIDR(mask)) maskParts = convertMaskToBinary(mask);
             else {
@@ -29,12 +30,10 @@ function isIPOk() {
                     maskParts[i] = addZerosLeft(convert(maskParts[i], 10, 2))
                 }
             }
-            // ip in binary
+            // convert ip in binary
             // then the broadcast part
             for (let i = 0 ; i < ipParts.length ; i++) {
-                ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
                 for (let j = 0; j < ipParts[i].length; j++) {
-
                     if(maskParts[i][j].localeCompare("1") == 0) {
                         unauthorizedAddress[i] += ipParts[i][j];
                     }
@@ -46,6 +45,7 @@ function isIPOk() {
             for (let i = 0 ; i < ipParts.length ; i++) {
                 ipParts[i] = convert(ipParts[i], 2, 10);
                 unauthorizedAddress[i] = convert(unauthorizedAddress[i], 2, 10);
+                netParts[i] = convert(netParts[i], 2, 10);
                 if(ipParts[i].localeCompare(netParts[i]) == 0 || ipParts[i].localeCompare(unauthorizedAddress[i]) == 0) {
                     answerF4.innerText = "This IP address is not authorized in this network.";
                 }
