@@ -1,4 +1,4 @@
-function isInNetwork(ipParts, netParts, mask,maskParts) {
+function isInNetwork(ipParts, netParts, mask, maskParts) {
     //transform the IPs into binaries number
     for(let i = 0 ; i < 4 ; i++){
         ipParts[i] = addZerosLeft(convert(ipParts[i], 10, 2));
@@ -18,7 +18,6 @@ function isInNetwork(ipParts, netParts, mask,maskParts) {
         for(let i = 0 ; i < 4 ; i++){
             maskParts[i] = addZerosLeft(convert(maskParts[i], 10, 2));
         }
-
         let maskObject2 = {
             byte:0,
             digit:0

@@ -2,10 +2,11 @@ function verifyIPAddress(ip, ipPart) {
     //check with a regex if the input is correct
     let regex = "^([0-9]{1,3}\\.){3}[0-9]{1,3}$";
     let regexObj = new RegExp(regex);
+
     //if the regex is ok
     if(regexObj.test(ip)) {
         let incorrect = false;
-        /* remove the "."'s and divide the IP adress into 4 parts */
+        // remove the "."'s and divide the IP adress into 4 parts
         //select all characters before the point
         for (let i = 0; i < 3; i++) {
             ipPart[i] = ip.substring(0, ip.indexOf("."));

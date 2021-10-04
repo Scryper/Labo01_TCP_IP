@@ -1,8 +1,0 @@
-Fonctionnalités annexes :
-	2) savoir si un masque est valide
-	4) visuel
-
-5 fonctionnalités principales:
-	2) IP + masque -> adresse réseau et adresse de broadcast du réseau. -> doing
-	4) IP machine + masque machine + adresse réseau -> IP est une machine du réseau?
-	5) 2 IP + 2 masques -> même réseau?

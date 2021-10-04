@@ -5,6 +5,7 @@ var answerF5 = document.getElementById('answer-f5');
 //when you click on the button
 btn.addEventListener('click', awarenessCheck);
 
+// checks if the two machine sknows each other
 function awarenessCheck(){
     //get the IP addresses and the masks
     let ip1 = document.getElementById('ip_address_1-f5').value;
@@ -30,18 +31,13 @@ function awarenessCheck(){
         }
 
         //check if the masks are the same
-        if(sameMask(mask1,maskParts1, mask2,maskParts2,maskObject)){
-            if(isSameNetwork(ipParts1,ipParts2, maskObject)){
-                answerF5.innerText = "The IPs are in the same network";
-            }
-        else{
-                answerF5.innerText = "The IPs are not in the same network";
-            }
+        if(sameMask(mask1, maskParts1, mask2, maskParts2, maskObject)){
+            if(isSameNetwork(ipParts1, ipParts2, maskObject)) answerF5.innerText = "The IPs are in the same network";
+            else answerF5.innerText = "The IPs are not in the same network";
         }
-        else{
-            answerF5.innerText = "The IPs have different masks";
-        }
+        else answerF5.innerText = "The IPs have different masks";
     }
+    // data not valid
     else {
         answerF5.innerText = "";
         if(!verifyIPAddress(ip1, ipParts1)) answerF5.innerText += "IP address 1 is not valid.";

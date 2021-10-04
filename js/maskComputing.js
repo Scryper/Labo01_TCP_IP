@@ -1,28 +1,24 @@
 function verifyMaskCIDR(mask) {
-    let regexCIDR = "^\/?[0-9]{1,2}$";
+    let regexCIDR = "^\/?[0-9]{1,2}$"; // used to check user's input
     let regexObjCIDR = new RegExp(regexCIDR);
 
     //if the regex is ok
     if(regexObjCIDR.test(mask)) {
         if(mask[0].localeCompare("\/") == 0) mask = mask.substring(1, mask.length);
-        if(mask > 31 || mask < 1) return false;
-        return true;
+        return !(mask > 31 || mask < 1);
+
     }
     return false;
 }
 
+// to verify a mask in decimal, it is the same as if we were checking an ip address
 function verifyMaskDecimal(mask, maskParts) {
     return verifyIPAddress(mask, maskParts);
 }
 
-function convertMaskToCIDR(maskParts) {
-    let count = 0;
-    for(let i = 0 ; i < maskParts.length ; i++) {
-        for(let j = 0 ; j < 8 ; j++) {
-            if(maskParts[i][j].localeCompare("1") == 0) count++;
-        }
-    }
-    return count;
+// convert a mask from binary to cidr notation
+function convertMaskToCIDR(mask) {
+    return mask.split("1").length - 1;
 }
 
 function convertMaskToBinary(mask) {
@@ -67,7 +63,6 @@ function computeMask(ip, maskObject){
 }
 
 function sameMask(mask1, maskParts1, mask2,maskParts2, maskObject1) {
-
     //if the mask is not in the CIDR form
     if(verifyMaskDecimal(mask1, maskParts1)){
         for(let i = 0 ; i < 4 ; i++){
@@ -82,11 +77,11 @@ function sameMask(mask1, maskParts1, mask2,maskParts2, maskObject1) {
             maskParts2[i] = addZerosLeft(convert(maskParts2[i], 10, 2));
         }
         let maskObject2 = {
-            byte:0,
-            digit:0
+            byte: 0,
+            digit: 0
         };
         mask2 = computeMask(maskParts2,maskObject2);
     }
     //if both mask are equals
-    return (mask1==mask2);
+    return (mask1 == mask2);
 }

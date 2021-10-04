@@ -9,15 +9,16 @@ btn.addEventListener('click', ipClass);
 function ipClass() {
     //get the IP address
     let ip = document.getElementById('ip_address-f1').value;
-
     //passed to the function by address not by value
     let ipPart = new Array(4);
 
+    // verify the validity of the fields' content
     if(verifyIPAddress(ip, ipPart)) {
         let classIP;
         let netNb = 0;
         let hostsNb = 0;
 
+        // determinates the information about the class of the IP address entered
         //Class A
         if(ipPart[0] > 0 && ipPart[0] < 127){
             classIP = "A";
@@ -41,11 +42,12 @@ function ipClass() {
             classIP = "E";
         }
         else {
-            classIP = "no class"
+            classIP = "No class"
         }
         answerF1.innerText = "IP address : " + ip + "\nClass : " + classIP + "\nNumber of subnetwork : " + netNb +
             "\nNumber maximum of hosts per subnetwork : " + hostsNb;
     }
+    // if the information is note valid
     else {
         answerF1.innerText = "The IP address entered is incorrect."
     }
