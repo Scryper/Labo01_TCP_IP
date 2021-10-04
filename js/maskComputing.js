@@ -68,8 +68,15 @@ function sameMask(mask1, maskParts1, mask2,maskParts2, maskObject1) {
         for(let i = 0 ; i < 4 ; i++){
             maskParts1[i] = addZerosLeft(convert(maskParts1[i], 10, 2));
         }
-        mask1 = computeMask(maskParts1,maskObject1);
     }
+    else{
+        maskParts1=convertMaskToBinary(mask1);
+        maskObject1.byte=Math.floor(mask1/8);
+        maskObject1.digit=mask1%8;
+    }
+
+    mask1 = computeMask(maskParts1,maskObject1);
+
 
     //if the mask is not in the CIDR form
     if(verifyMaskDecimal(mask2, maskParts2)){
@@ -82,6 +89,7 @@ function sameMask(mask1, maskParts1, mask2,maskParts2, maskObject1) {
         };
         mask2 = computeMask(maskParts2,maskObject2);
     }
+
     //if both mask are equals
     return (mask1 == mask2);
 }

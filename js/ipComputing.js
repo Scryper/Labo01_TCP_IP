@@ -30,7 +30,6 @@ function isSameNetwork(ip1, ip2, mask) {
     //compare each bit from the mask
     //if they are the same, the two IP are from the same network
     let same = true;
-
     for(let i = 0 ; i < mask.byte ; i++) {
         if(i + 1 == mask.byte) {
             for(let j = 0 ; j < mask.digit ; j++) {
