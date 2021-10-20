@@ -10,8 +10,6 @@ function isInNetwork(ipParts, netParts, mask, maskParts) {
         byte:0,
         digit:0
     }
-    //compute the mask of the net
-    let netMask = computeMask(netParts, maskObject);
 
     //if the mask is not in the CIDR form
     if(verifyMaskDecimal(mask, maskParts)){
@@ -25,7 +23,32 @@ function isInNetwork(ipParts, netParts, mask, maskParts) {
         mask = computeMask(maskParts,maskObject2)
     }
 
+    //compute the mask of the net
+    //regarder si tous les bits jusqu'a la fin du masque sont égaux a ceux de l'adresse IP, puis chexk si tous les bits restants sont égaux a 0
+    let count = 0;
+    let boolean = false;
+    console.log(ipParts,netParts);
+    for(let i = 0 ; i < 4 ; i++){
+        //backwards on the array of digits
+        for(let j = 0 ; j < 8 ; j++){
+            console.log(count,count>=mask);
+            if(count>=mask){
+                if(netParts[i][j]!=0){
+                    boolean=true;
+                }
+            }
+            else{
+                if(netParts[i][j]!=ipParts[i][j]){
+                    boolean=true;
+                }
+            }
+            count++;
+        }
+        console.log(boolean);
+    }
+
+
     //if both mask are equals
-    if(netMask == mask) return isSameNetwork(netParts, ipParts, maskObject);
+    if(!boolean) return isSameNetwork(netParts, ipParts, maskObject);
     else return false;
 }
