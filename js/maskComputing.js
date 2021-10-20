@@ -4,9 +4,8 @@ function verifyMaskCIDR(mask) {
 
     //if the regex is ok
     if(regexObjCIDR.test(mask)) {
-        if(mask[0].localeCompare("\/") == 0) mask = mask.substring(1, mask.length);
+        if(mask[0] == "\/") mask = mask.substring(1, mask.length);
         return !(mask > 31 || mask < 1);
-
     }
     return false;
 }
@@ -25,7 +24,7 @@ function convertMaskToBinary(mask) {
     let maskParts = ["", "", "", ""];
     let count = 1;
     let part = 0;
-    if(mask[0].localeCompare("\/") == 0) mask = mask.substring(1, mask.length);
+    if(mask.toString()[0].localeCompare("\/") == 0) mask = mask.substring(1, mask.length);
     // we add the amount of 1s that we need
     for(let i = 0 ; i < mask ; i++) {
         maskParts[part] += "1";

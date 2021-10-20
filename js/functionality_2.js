@@ -25,7 +25,15 @@ function netInfo() {
         if(isChecked) {
             // convert the mask in cidr if it is not in cidr
             if(!verifyMaskCIDR(mask)) {
-                mask = convertMaskToCIDR(convert(mask, 10, 2));
+                let tmp;
+                mask = 0;
+                for (let i = 0; i <= 3; i++) {
+                    tmp = convert(maskParts[i], 10, 2);
+                    mask += convertMaskToCIDR(tmp);
+                }
+            }
+            else {
+                if(mask[0] == "\/") mask = mask.substring(1, mask.length);
             }
 
             // if class A/B/C, only 1/2/3 bytes need to be fill with 1s (see line 97)
@@ -33,17 +41,15 @@ function netInfo() {
             else if(ipParts[0] >= 128 && ipParts[0] < 192) byte = 2;
             else if(ipParts[0] >= 192 && ipParts[0] < 224) byte = 3;
             else possible = false;
-            if(byte * 8 >= mask) possible = false;
+            if(byte * 8 > mask) possible = false;
 
             // check if the mask is a multiple of 8
-            if(mask % 8 != 0) {
-                subnetting = true;
-            }
+            if(mask % 8 != 0) subnetting = true;
         }
         if(possible) {
             let netParts = ["", "", "", ""];
             let broadcastParts = ["", "", "", ""];
-            // convert in decimal then in binary if it is cidr
+            // convert in binary if it is cidr
             if(verifyMaskCIDR(mask)) maskParts = convertMaskToBinary(mask);
             else { // deleting the . then converting in binary
                 for (let i = 0 ; i < maskParts.length ; i++) {
