@@ -26,19 +26,47 @@ function awarenessCheck(){
         if(mask1[0] == "\/") mask1 = mask1.substring(1, mask1.length);
         if(mask2[0] == "\/") mask2 = mask2.substring(1, mask2.length);
         //creating an object to get the information on the mask
-        let maskObject = {
+        let maskObject1 = {
+            byte:0,
+            digit:0
+        }
+        let maskObject2 = {
             byte:0,
             digit:0
         }
 
-        //check if the masks are the same
-        if(sameMask(mask1, maskParts1, mask2, maskParts2, maskObject)){
-            if(isSameNetwork(ipParts1, ipParts2, maskObject)) answerF5.innerText = "The IPs are in the same network";
-            else answerF5.innerText = "The IPs are not in the same network";
+        //if the mask is not in the CIDR form
+        if(verifyMaskDecimal(mask1, maskParts1)){
+            for(let i = 0 ; i < 4 ; i++){
+                maskParts1[i] = addZerosLeft(convert(maskParts1[i], 10, 2));
+            }
         }
-        else answerF5.innerText = "The IPs have different masks";
+        else {
+            maskParts1 = convertMaskToBinary(mask1);
+            maskObject1.byte = Math.floor(mask1 / 8);
+            maskObject1.digit = mask1 % 8;
+        }
+        //if the mask is not in the CIDR form
+        if(verifyMaskDecimal(mask2, maskParts2)){
+            for(let i = 0 ; i < 4 ; i++){
+                maskParts2[i] = addZerosLeft(convert(maskParts2[i], 10, 2));
+            }
+        }
+        else {
+            maskParts2 = convertMaskToBinary(mask2);
+            maskObject2.byte = Math.floor(mask2 / 8);
+            maskObject2.digit = mask2 % 8;
+        }
+        mask1 = computeMask(maskParts1, maskObject1);
+        mask2 = computeMask(maskParts2, maskObject2);
+
+        if(isSameNetwork(ipParts1, ipParts2, maskObject1)) answerF5.innerText = "IP1 considers that they are in the same network";
+        else answerF5.innerText = "IP1 considers that they are not in the same network";
+        if(isSameNetwork(ipParts1, ipParts2, maskObject2)) answerF5.innerText = answerF5.innerText + "\nIP2 considers that they are in the same network";
+        else answerF5.innerText = answerF5.innerText + "\nIP2 considers that they are not in the same network";
+
     }
-    // data not valid
+    //data is not valid
     else {
         answerF5.innerText = "";
         if(!verifyIPAddress(ip1, ipParts1)) answerF5.innerText += "IP address 1 is not valid.";
