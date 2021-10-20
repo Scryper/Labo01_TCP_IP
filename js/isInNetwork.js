@@ -27,26 +27,22 @@ function isInNetwork(ipParts, netParts, mask, maskParts) {
     //regarder si tous les bits jusqu'a la fin du masque sont égaux a ceux de l'adresse IP, puis chexk si tous les bits restants sont égaux a 0
     let count = 0;
     let boolean = false;
-    console.log(ipParts,netParts);
-    for(let i = 0 ; i < 4 ; i++){
+    for(let i = 0 ; i < 4 ; i++) {
         //backwards on the array of digits
-        for(let j = 0 ; j < 8 ; j++){
-            console.log(count,count>=mask);
-            if(count>=mask){
-                if(netParts[i][j]!=0){
-                    boolean=true;
+        for(let j = 0 ; j < 8 ; j++) {
+            if(count >= mask){
+                if(netParts[i][j] != 0) {
+                    boolean = true;
                 }
             }
-            else{
-                if(netParts[i][j]!=ipParts[i][j]){
-                    boolean=true;
+            else {
+                if(netParts[i][j] != ipParts[i][j]) {
+                    boolean = true;
                 }
             }
             count++;
         }
-        console.log(boolean);
     }
-
 
     //if both mask are equals
     if(!boolean) return isSameNetwork(netParts, ipParts, maskObject);

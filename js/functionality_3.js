@@ -20,6 +20,7 @@ function membershipCheck() {
     //if the mask and the IP's are correct
     if((verifyMaskCIDR(mask) || verifyMaskDecimal(mask, maskParts))
         && verifyIPAddress(ip, ipParts) && verifyIPAddress(net, netParts)) {
+        if(mask[0] == "\/") mask = mask.substring(1, mask.length);
         // verify if the IPs are in the same network or not
         if(isInNetwork(ipParts, netParts, mask, maskParts)) answerF3.innerText = "The IP's are on the same network";
         else answerF3.innerText = "The IP's are not on the same network";
@@ -28,7 +29,7 @@ function membershipCheck() {
     else {
         answerF3.innerText = "";
         if(!verifyIPAddress(ip, ipParts)) answerF3.innerText = "The IP address is not a valid IP address.";
-        if(!verifyMaskCIDR(mask)&&!verifyMaskDecimal(mask,maskParts)) answerF3.innerText = answerF3.innerText + "\nThe mask is not a correct mask.";
+        if(!verifyMaskCIDR(mask) && !verifyMaskDecimal(mask, maskParts)) answerF3.innerText = answerF3.innerText + "\nThe mask is not a correct mask.";
         if(!verifyIPAddress(net, netParts)) answerF3.innerText = answerF3.innerText + "\nThe Net address is not a valid IP address..";
     }
 }

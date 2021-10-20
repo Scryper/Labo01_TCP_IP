@@ -23,7 +23,8 @@ function awarenessCheck(){
     if((verifyMaskCIDR(mask1) || verifyMaskDecimal(mask1, maskParts1))
         &&(verifyMaskCIDR(mask2) || verifyMaskDecimal(mask2, maskParts2))
         && verifyIPAddress(ip1, ipParts1) && verifyIPAddress(ip2, ipParts2)) {
-
+        if(mask1[0] == "\/") mask1 = mask1.substring(1, mask1.length);
+        if(mask2[0] == "\/") mask2 = mask2.substring(1, mask2.length);
         //creating an object to get the information on the mask
         let maskObject = {
             byte:0,
